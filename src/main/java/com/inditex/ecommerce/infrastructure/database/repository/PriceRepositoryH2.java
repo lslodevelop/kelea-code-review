@@ -3,8 +3,11 @@ package com.inditex.ecommerce.infrastructure.database.repository;
 import com.inditex.ecommerce.infrastructure.database.model.PriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
-public interface PriceRepositoryH2 extends JpaRepository<PriceEntity, UUID> {
+public interface PriceRepositoryH2 extends JpaRepository<PriceEntity, Long> {
 
+    Optional<PriceEntity> findTopByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+            Long productId, Long brandId, LocalDateTime startDateBefore, LocalDateTime endDateAfter);
 }

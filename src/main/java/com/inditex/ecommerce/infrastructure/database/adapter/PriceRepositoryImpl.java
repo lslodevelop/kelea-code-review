@@ -3,13 +3,13 @@ package com.inditex.ecommerce.infrastructure.database.adapter;
 import com.inditex.ecommerce.domain.model.prices.Price;
 import com.inditex.ecommerce.domain.ports.out.PriceRepositoryPort;
 import com.inditex.ecommerce.infrastructure.database.adapter.mapper.PriceDatabaseMapper;
-import com.inditex.ecommerce.infrastructure.database.model.PriceEntity;
 import com.inditex.ecommerce.infrastructure.database.repository.PriceRepositoryH2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -20,8 +20,9 @@ public class PriceRepositoryImpl implements PriceRepositoryPort {
     private final PriceDatabaseMapper priceDatabaseMapper;
 
     @Override
-    public Price getPrice(final UUID id) {
-        final PriceEntity priceEntity = priceRepositoryH2.findById(id).orElse(null);
-        return priceDatabaseMapper.fromEntityToDomain(priceEntity);
+    public Optional<Price> getPrice(final LocalDateTime applyDate, final Long productId, final Long brandId) {
+        return priceRepositoryH2.findTopByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+                productId, brandId, applyDate, applyDate)
+                .map(priceDatabaseMapper::fromEntityToDomain);
     }
 }

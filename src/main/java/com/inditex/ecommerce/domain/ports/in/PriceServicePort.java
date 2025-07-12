@@ -2,10 +2,10 @@ package com.inditex.ecommerce.domain.ports.in;
 
 import com.inditex.ecommerce.domain.model.prices.Price;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 public interface PriceServicePort {
 
-    Price getPrice(UUID id);
+    Price getPrice(LocalDateTime applyDate, Long productId, Long brandId);
 
 }

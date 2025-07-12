@@ -9,7 +9,7 @@
     <!-- ChangeSet 1: Crear tabla -->
     <changeSet id="Creación de tabla prices" author="Luis López">
         <createTable tableName="prices">
-            <column name="id" type="UUID" defaultValueComputed="RANDOM_UUID()">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="brand_id" type="INT">
@@ -47,7 +47,7 @@
     <!-- ChangeSet 2: Insertar datos -->
     <changeSet id="Inserción de datos iniciales en la tabla" author="Luis López">
         <insert tableName="prices">
-            <column name="id" valueComputed="RANDOM_UUID()"/>
+            <column name="id" type="BIGINT" autoIncrement="true"/>
             <column name="brand_id" value="1"/>
             <column name="start_date" value="2020-06-14T00:00:00"/>
             <column name="end_date" value="2020-12-31T23:59:59"/>
@@ -58,7 +58,7 @@
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
-            <column name="id" valueComputed="RANDOM_UUID()"/>
+            <column name="id" type="BIGINT" autoIncrement="true"/>
             <column name="brand_id" value="1"/>
             <column name="start_date" value="2020-06-14T15:00:00"/>
             <column name="end_date" value="2020-06-14T18:30:00"/>
@@ -69,7 +69,7 @@
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
-            <column name="id" valueComputed="RANDOM_UUID()"/>
+            <column name="id" type="BIGINT" autoIncrement="true"/>
             <column name="brand_id" value="1"/>
             <column name="start_date" value="2020-06-15T00:00:00"/>
             <column name="end_date" value="2020-06-15T11:00:00"/>
@@ -80,7 +80,7 @@
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
-            <column name="id" valueComputed="RANDOM_UUID()"/>
+            <column name="id" type="BIGINT" autoIncrement="true"/>
             <column name="brand_id" value="1"/>
             <column name="start_date" value="2020-06-15T16:00:00"/>
             <column name="end_date" value="2020-12-31T23:59:59"/>
