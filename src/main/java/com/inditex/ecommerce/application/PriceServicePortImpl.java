@@ -7,6 +7,7 @@ import com.inditex.ecommerce.domain.ports.in.PriceServicePort;
 import com.inditex.ecommerce.domain.ports.out.PriceRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,9 @@ public class PriceServicePortImpl implements PriceServicePort {
     private final PriceRepositoryPort priceRepositoryPort;
 
     @Override
+    @Cacheable(value = "price", key = "{#applyDate, #productId, #brandId}", unless = "#result == null")
     public Price getPrice(final LocalDateTime applyDate, final Long productId, final Long brandId) {
+        log.info("NO CACHEOOOOOO!");
         return priceRepositoryPort.getPrice(applyDate, productId, brandId)
                 .orElseThrow(() -> new ControlledErrorException(
                         ApplicationErrorCodes.NOT_FOUND_PRICE_ERROR,

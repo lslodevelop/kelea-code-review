@@ -15,6 +15,10 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
   liquibase:
     change-log: classpath:database/changelog.xml
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=10m, expireAfterAccess=5m
 
 logging:
     level:
