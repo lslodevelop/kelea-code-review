@@ -1,9 +1,12 @@
 package com.inditex.ecommerce.interfaces.web.controller;
 
 import com.inditex.ecommerce.interfaces.aop.TraceableEndpoint;
+import com.inditex.ecommerce.interfaces.model.ErrorResponseDto;
 import com.inditex.ecommerce.interfaces.model.PriceDto;
 import com.inditex.ecommerce.interfaces.web.adapter.PriceInterfaceAdapter;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +28,16 @@ public class PriceV1Controller {
     private final PriceInterfaceAdapter priceInterfaceAdapter;
 
     @TraceableEndpoint
-    @Operation(summary = "Get a price by id", operationId = "getPrice", method = "GET", tags = {"Prices"})
+    @Operation(summary = "Get a price base on search criteria", operationId = "getPrice", method = "GET", tags = {"Prices"})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Price retrieved successfully")})
+            @ApiResponse(responseCode = "200", description = "Price retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))
+    })
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public PriceDto getPrice(@RequestParam(value = "applyDate") final String applyDate,
