@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.interfaces.web;
+package com.inditex.ecommerce.interfaces.web.controller;
 
 import com.inditex.ecommerce.interfaces.model.PriceDto;
 import com.inditex.ecommerce.interfaces.web.adapter.impl.PriceInterfaceAdapterImpl;

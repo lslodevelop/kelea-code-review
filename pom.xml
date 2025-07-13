@@ -192,6 +192,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Failsafe plugin to run integration tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 

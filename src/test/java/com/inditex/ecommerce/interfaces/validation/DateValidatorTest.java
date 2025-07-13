@@ -30,20 +30,6 @@ class DateValidatorTest {
     }
 
     @Test
-    void validateLocalDateTimeFormat_nullExceptionTest() {
-        //given
-
-        //when
-        final ControlledErrorException response =
-                assertThrows(ControlledErrorException.class,
-                        () -> dateValidator.validateLocalDateTimeFormat(null));
-
-        //then
-        assertThat(response.getMessage()).isEqualTo("The LocalDateTime cannot be null");
-        assertThat(response.getErrorCode().getCode()).isEqualTo("error.ecommerce.application.02");
-    }
-
-    @Test
     void validateLocalDateTimeFormat_parseExceptionTest() {
         //given
         final String localDateTimeAsString = "test";

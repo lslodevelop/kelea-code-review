@@ -13,11 +13,6 @@ import java.time.format.DateTimeParseException;
 public class DateValidator {
 
     public LocalDateTime validateLocalDateTimeFormat(final String localDateTime) {
-        if (localDateTime == null) {
-            log.warn("The LocalDateTime is null");
-            throw new ControlledErrorException(ApplicationErrorCodes.INVALID_LOCAL_DATE_TIME,
-                    "The LocalDateTime cannot be null");
-        }
         try {
             return PriceDateTimeFormatter.parseStringToLocalDateTime(localDateTime);
         } catch (final DateTimeParseException e) {

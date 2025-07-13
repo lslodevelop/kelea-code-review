@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.interfaces.web;
+package com.inditex.ecommerce.interfaces.web.controller;
 
 import com.inditex.ecommerce.interfaces.aop.TraceableEndpoint;
 import com.inditex.ecommerce.interfaces.model.PriceDto;
@@ -28,7 +28,7 @@ public class PriceV1Controller {
     @Operation(summary = "Get a price by id", operationId = "getPrice", method = "GET", tags = {"Prices"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Price retrieved successfully")})
-    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public PriceDto getPrice(@RequestParam(value = "applyDate") final String applyDate,
                              @RequestParam(value = "productId") final Long productId,
