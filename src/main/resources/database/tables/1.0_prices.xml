@@ -28,7 +28,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="priority" type="INT"/>
-            <column name="price" type="DECIMAL(10,2)"/>
+            <column name="amount" type="DECIMAL(10,2)"/>
             <column name="currency" type="VARCHAR(3)"/>
         </createTable>
 
@@ -54,7 +54,7 @@
             <column name="price_list" value="1"/>
             <column name="product_id" value="35455"/>
             <column name="priority" value="0"/>
-            <column name="price" value="35.50"/>
+            <column name="amount" value="35.50"/>
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
@@ -65,7 +65,7 @@
             <column name="price_list" value="2"/>
             <column name="product_id" value="35455"/>
             <column name="priority" value="1"/>
-            <column name="price" value="25.45"/>
+            <column name="amount" value="25.45"/>
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
@@ -76,7 +76,7 @@
             <column name="price_list" value="3"/>
             <column name="product_id" value="35455"/>
             <column name="priority" value="1"/>
-            <column name="price" value="30.50"/>
+            <column name="amount" value="30.50"/>
             <column name="currency" value="EUR"/>
         </insert>
         <insert tableName="prices">
@@ -87,7 +87,7 @@
             <column name="price_list" value="4"/>
             <column name="product_id" value="35455"/>
             <column name="priority" value="1"/>
-            <column name="price" value="38.95"/>
+            <column name="amount" value="38.95"/>
             <column name="currency" value="EUR"/>
         </insert>
 

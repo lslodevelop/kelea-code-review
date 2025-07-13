@@ -15,6 +15,6 @@ public class Price {
     private Integer priceList;
     private Long productId;
     private Integer priority;
-    private BigDecimal price;
+    private BigDecimal amount;
     private Currency currency;
 }

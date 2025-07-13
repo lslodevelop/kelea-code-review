@@ -37,8 +37,8 @@ public class PriceDto {
     @Schema(description = "Product ID")
     private Long productId;
 
-    @Schema(description = "Price value")
-    private BigDecimal price;
+    @Schema(description = "Amount value")
+    private BigDecimal amount;
 
     @Schema(description = "Price currency")
     private String currency;

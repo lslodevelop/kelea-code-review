@@ -47,7 +47,7 @@ class PriceRepositoryImplTest {
         final Optional<Price> optionalPrice = priceRepositoryImpl.getPrice(applyDate, productId, brandId);
 
         //then
-        assertThat(optionalPrice.isPresent()).isTrue();
+        assertThat(optionalPrice).isPresent();
         Mockito.verify(priceRepositoryH2)
                 .findTopByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityDesc(
                         productId, brandId, applyDate, applyDate);
