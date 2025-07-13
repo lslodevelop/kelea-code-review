@@ -6,6 +6,7 @@ import com.inditex.ecommerce.domain.exception.ControlledErrorException;
 import com.inditex.ecommerce.domain.exception.GenericErrorCodes;
 import com.inditex.ecommerce.interfaces.exception.HttpErrorStatusResolver;
 import com.inditex.ecommerce.interfaces.model.ErrorResponseDto;
+import com.inditex.ecommerce.interfaces.tracing.TraceUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +29,14 @@ import static java.lang.String.format;
 public class GlobalExceptionHandler {
 
     private final HttpErrorStatusResolver httpErrorStatusResolver;
+    private final TraceUtils traceUtils;
 
     @ExceptionHandler(ControlledErrorException.class)
     public ResponseEntity<ErrorResponseDto> handleControlledException(final ControlledErrorException ex) {
-        log.warn("Controlled exception {}, with message={}. Returning response",
-                ex.getErrorCode().getCode(), ex.getMessage());
+        log.warn("Controlled exception {}, with message={}. Trace ID: {}. Returning response",
+                ex.getErrorCode().getCode(), ex.getMessage(), traceUtils.getCurrentTraceId());
         final ErrorResponseDto errorResponseDto = new ErrorResponseDto(ex.getErrorCode().getCode(),
-                ex.getMessage(), LocalDateTime.now());
+                ex.getMessage(), traceUtils.getCurrentTraceId(), LocalDateTime.now());
         final HttpStatus httpStatus = httpErrorStatusResolver.resolveHttpStatus(ex.getErrorCode());
         return new ResponseEntity<>(errorResponseDto, httpStatus);
     }
@@ -44,7 +46,8 @@ public class GlobalExceptionHandler {
     public ErrorResponseDto handleNoResourceFoundException(final NoResourceFoundException ex, final HttpServletRequest request) {
         final String message = format("Invalid endpoint path: %s. Review the path", request.getRequestURI());
         log.error(message);
-        return new ErrorResponseDto(ApplicationErrorCodes.WRONG_PATH.getCode(), message, LocalDateTime.now());
+        return new ErrorResponseDto(ApplicationErrorCodes.WRONG_PATH.getCode(), message,
+                traceUtils.getCurrentTraceId(), LocalDateTime.now());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -53,7 +56,8 @@ public class GlobalExceptionHandler {
         final String message = format
                 ("Malformed URL. %s:", ex.getMessage());
         log.error("Invalid URL. Please check proper format {}", ex.getMessage());
-        return new ErrorResponseDto(ApplicationErrorCodes.INVALID_URL.getCode(), message, LocalDateTime.now());
+        return new ErrorResponseDto(ApplicationErrorCodes.INVALID_URL.getCode(), message,
+                traceUtils.getCurrentTraceId() ,LocalDateTime.now());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -62,7 +66,8 @@ public class GlobalExceptionHandler {
         final String message = format
                 ("Malformed URL. %s:", ex.getMessage());
         log.error("Invalid parameter types for provided URL. Please check proper format {}", ex.getMessage());
-        return new ErrorResponseDto(ApplicationErrorCodes.MALFORMED_URL.getCode(), message, LocalDateTime.now());
+        return new ErrorResponseDto(ApplicationErrorCodes.MALFORMED_URL.getCode(), message,
+                traceUtils.getCurrentTraceId(), LocalDateTime.now());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -71,7 +76,8 @@ public class GlobalExceptionHandler {
         final String message = format
                 ("There was an unexpected error in the application [BUG]: %s, please contact support", ex.getMessage());
         log.error("Application error in {}, stack trace: \n %s", ex.getClass().getName(), ex);
-        return new ErrorResponseDto(GenericErrorCodes.GENERIC_ERROR_BUG.getCode(), message, LocalDateTime.now());
+        return new ErrorResponseDto(GenericErrorCodes.GENERIC_ERROR_BUG.getCode(), message,
+                traceUtils.getCurrentTraceId(), LocalDateTime.now());
     }
 
 }

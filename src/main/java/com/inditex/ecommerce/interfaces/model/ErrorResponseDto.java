@@ -16,7 +16,12 @@ public record ErrorResponseDto(
         @Schema(description = "Error message")
         String message,
 
+        @Schema(description = "Trace ID for tracking purposes")
+        String traceId,
+
         @Schema(description = "Timestamp of the error")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
         LocalDateTime timestamp
+
+
 ) {}

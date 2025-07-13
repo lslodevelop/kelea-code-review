@@ -5,6 +5,7 @@ import com.inditex.ecommerce.domain.exception.ControlledErrorException;
 import com.inditex.ecommerce.domain.exception.GenericErrorCodes;
 import com.inditex.ecommerce.interfaces.exception.HttpErrorStatusResolver;
 import com.inditex.ecommerce.interfaces.model.ErrorResponseDto;
+import com.inditex.ecommerce.interfaces.tracing.TraceUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,9 @@ class GlobalExceptionHandlerTest {
     @Mock
     private HttpErrorStatusResolver httpErrorStatusResolver;
 
+    @Mock
+    private TraceUtils traceUtils;
+
     @Test
     void handleControlledExceptionTest() {
         // given
@@ -41,6 +45,7 @@ class GlobalExceptionHandlerTest {
                 "Price not found"
         );
 
+        when(traceUtils.getCurrentTraceId()).thenReturn("1234");
         when(httpErrorStatusResolver.resolveHttpStatus(ApplicationErrorCodes.NOT_FOUND_PRICE_ERROR))
                 .thenReturn(HttpStatus.NOT_FOUND);
 
@@ -52,6 +57,7 @@ class GlobalExceptionHandlerTest {
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().code()).isEqualTo("error.ecommerce.application.01");
         assertThat(response.getBody().message()).isEqualTo("Price not found");
+        verify(traceUtils, times(2)).getCurrentTraceId();
         verify(httpErrorStatusResolver).resolveHttpStatus(ApplicationErrorCodes.NOT_FOUND_PRICE_ERROR);
     }
 
@@ -59,6 +65,8 @@ class GlobalExceptionHandlerTest {
     void handleNoResourceFoundExceptionTest() {
         // given
         final NoResourceFoundException noResourceFoundException = new NoResourceFoundException(HttpMethod.GET, "/api/v1/prices");
+
+        when(traceUtils.getCurrentTraceId()).thenReturn("1234");
 
         final HttpServletRequest mockRequest = mock(HttpServletRequest.class);
         when(mockRequest.getRequestURI()).thenReturn("/api/v1/prices");
@@ -69,6 +77,7 @@ class GlobalExceptionHandlerTest {
         // then
         assertThat(response.code()).isEqualTo("error.ecommerce.application.05");
         assertThat(response.message()).contains("Invalid endpoint path");
+        verify(traceUtils).getCurrentTraceId();
         verify(mockRequest).getRequestURI();
     }
 
@@ -78,12 +87,15 @@ class GlobalExceptionHandlerTest {
         final MissingServletRequestParameterException missingServletRequestParameterException =
                 new MissingServletRequestParameterException("brandId", "Long");
 
+        when(traceUtils.getCurrentTraceId()).thenReturn("1234");
+
         // when
         final ErrorResponseDto response = globalExceptionHandler.handleMalformedUrlException(missingServletRequestParameterException);
 
         // then
         assertThat(response.code()).isEqualTo(ApplicationErrorCodes.INVALID_URL.getCode());
         assertThat(response.message()).contains("Malformed URL");
+        verify(traceUtils).getCurrentTraceId();
     }
 
     @Test
@@ -92,12 +104,15 @@ class GlobalExceptionHandlerTest {
         final MethodArgumentTypeMismatchException methodArgumentTypeMismatchException = mock(MethodArgumentTypeMismatchException.class);
         when(methodArgumentTypeMismatchException.getMessage()).thenReturn("Expected Long but got String");
 
+        when(traceUtils.getCurrentTraceId()).thenReturn("1234");
+
         // when
         final ErrorResponseDto response = globalExceptionHandler.handleArgumentMismatchException(methodArgumentTypeMismatchException);
 
         // then
         assertThat(response.code()).isEqualTo(ApplicationErrorCodes.MALFORMED_URL.getCode());
         assertThat(response.message()).contains("Malformed URL");
+        verify(traceUtils).getCurrentTraceId();
         verify(methodArgumentTypeMismatchException, times(2)).getMessage();
     }
 
@@ -106,12 +121,15 @@ class GlobalExceptionHandlerTest {
         // given
         final Exception exception = new IllegalStateException("Bug encountered");
 
+        when(traceUtils.getCurrentTraceId()).thenReturn("1234");
+
         // when
         final ErrorResponseDto response = globalExceptionHandler.handleBugException(exception);
 
         // then
         assertThat(response.code()).isEqualTo(GenericErrorCodes.GENERIC_ERROR_BUG.getCode());
         assertThat(response.message()).contains("There was an unexpected error in the application");
+        verify(traceUtils).getCurrentTraceId();
     }
 
 }
