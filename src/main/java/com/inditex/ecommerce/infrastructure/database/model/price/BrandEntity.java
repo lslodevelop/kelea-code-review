@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.infrastructure.database.model;
+package com.inditex.ecommerce.infrastructure.database.model.price;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

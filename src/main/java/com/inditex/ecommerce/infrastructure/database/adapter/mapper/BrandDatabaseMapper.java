@@ -1,7 +1,7 @@
 package com.inditex.ecommerce.infrastructure.database.adapter.mapper;
 
-import com.inditex.ecommerce.domain.model.prices.Brand;
-import com.inditex.ecommerce.infrastructure.database.model.BrandEntity;
+import com.inditex.ecommerce.domain.model.price.Brand;
+import com.inditex.ecommerce.infrastructure.database.model.price.BrandEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

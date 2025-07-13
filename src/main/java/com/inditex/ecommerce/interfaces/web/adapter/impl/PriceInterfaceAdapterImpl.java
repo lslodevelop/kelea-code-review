@@ -1,8 +1,8 @@
 package com.inditex.ecommerce.interfaces.web.adapter.impl;
 
-import com.inditex.ecommerce.domain.model.prices.Price;
+import com.inditex.ecommerce.domain.model.price.Price;
 import com.inditex.ecommerce.domain.ports.in.PriceServicePort;
-import com.inditex.ecommerce.interfaces.model.PriceDto;
+import com.inditex.ecommerce.interfaces.model.price.PriceDto;
 import com.inditex.ecommerce.interfaces.validation.DateValidator;
 import com.inditex.ecommerce.interfaces.web.adapter.PriceInterfaceAdapter;
 import com.inditex.ecommerce.interfaces.web.adapter.mapper.PriceInterfaceMapper;

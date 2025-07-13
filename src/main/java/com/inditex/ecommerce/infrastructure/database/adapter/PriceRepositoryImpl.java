@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.infrastructure.database.adapter;
 
-import com.inditex.ecommerce.domain.model.prices.Price;
+import com.inditex.ecommerce.domain.model.price.Price;
 import com.inditex.ecommerce.domain.ports.out.PriceRepositoryPort;
 import com.inditex.ecommerce.infrastructure.database.adapter.mapper.PriceDatabaseMapper;
 import com.inditex.ecommerce.infrastructure.database.repository.PriceRepositoryH2;

@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.infrastructure.database.repository;
 
-import com.inditex.ecommerce.infrastructure.database.model.PriceEntity;
+import com.inditex.ecommerce.infrastructure.database.model.price.PriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

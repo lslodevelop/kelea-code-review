@@ -2,7 +2,7 @@ package com.inditex.ecommerce.application;
 
 import com.inditex.ecommerce.domain.exception.ApplicationErrorCodes;
 import com.inditex.ecommerce.domain.exception.ControlledErrorException;
-import com.inditex.ecommerce.domain.model.prices.Price;
+import com.inditex.ecommerce.domain.model.price.Price;
 import com.inditex.ecommerce.domain.ports.in.PriceServicePort;
 import com.inditex.ecommerce.domain.ports.out.PriceRepositoryPort;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.interfaces.web.controller;
 
-import com.inditex.ecommerce.interfaces.model.PriceDto;
+import com.inditex.ecommerce.interfaces.model.price.PriceDto;
 import com.inditex.ecommerce.interfaces.web.adapter.impl.PriceInterfaceAdapterImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

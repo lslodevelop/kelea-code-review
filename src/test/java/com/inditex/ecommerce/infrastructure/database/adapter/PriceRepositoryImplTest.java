@@ -1,8 +1,8 @@
 package com.inditex.ecommerce.infrastructure.database.adapter;
 
-import com.inditex.ecommerce.domain.model.prices.Price;
+import com.inditex.ecommerce.domain.model.price.Price;
 import com.inditex.ecommerce.infrastructure.database.adapter.mapper.PriceDatabaseMapper;
-import com.inditex.ecommerce.infrastructure.database.model.PriceEntity;
+import com.inditex.ecommerce.infrastructure.database.model.price.PriceEntity;
 import com.inditex.ecommerce.infrastructure.database.repository.PriceRepositoryH2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

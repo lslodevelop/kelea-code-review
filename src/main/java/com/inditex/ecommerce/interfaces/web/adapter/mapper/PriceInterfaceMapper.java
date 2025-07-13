@@ -1,8 +1,8 @@
 package com.inditex.ecommerce.interfaces.web.adapter.mapper;
 
-import com.inditex.ecommerce.domain.model.prices.Currency;
-import com.inditex.ecommerce.domain.model.prices.Price;
-import com.inditex.ecommerce.interfaces.model.PriceDto;
+import com.inditex.ecommerce.domain.model.price.Currency;
+import com.inditex.ecommerce.domain.model.price.Price;
+import com.inditex.ecommerce.interfaces.model.price.PriceDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

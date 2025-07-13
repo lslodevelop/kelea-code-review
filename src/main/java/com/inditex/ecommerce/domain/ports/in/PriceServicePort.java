@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.domain.ports.in;
 
-import com.inditex.ecommerce.domain.model.prices.Price;
+import com.inditex.ecommerce.domain.model.price.Price;
 
 import java.time.LocalDateTime;
 

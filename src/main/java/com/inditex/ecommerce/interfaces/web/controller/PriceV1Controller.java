@@ -2,7 +2,7 @@ package com.inditex.ecommerce.interfaces.web.controller;
 
 import com.inditex.ecommerce.interfaces.aop.TraceableEndpoint;
 import com.inditex.ecommerce.interfaces.model.ErrorResponseDto;
-import com.inditex.ecommerce.interfaces.model.PriceDto;
+import com.inditex.ecommerce.interfaces.model.price.PriceDto;
 import com.inditex.ecommerce.interfaces.web.adapter.PriceInterfaceAdapter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

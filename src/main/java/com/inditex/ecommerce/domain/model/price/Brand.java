@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.domain.model.prices;
+package com.inditex.ecommerce.domain.model.price;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
