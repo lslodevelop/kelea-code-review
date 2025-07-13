@@ -21,7 +21,7 @@ public class PriceRepositoryImpl implements PriceRepositoryPort {
 
     @Override
     public Optional<Price> getPrice(final LocalDateTime applyDate, final Long productId, final Long brandId) {
-        return priceRepositoryH2.findTopByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+        return priceRepositoryH2.findTopByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityDesc(
                 productId, brandId, applyDate, applyDate)
                 .map(priceDatabaseMapper::fromEntityToDomain);
     }

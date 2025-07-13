@@ -33,18 +33,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleControlledException(final ControlledErrorException ex) {
         log.warn("Controlled exception {}, with message={}. Returning response",
                 ex.getErrorCode().getCode(), ex.getMessage());
-        final ErrorResponseDto errorResponseDto = new ErrorResponseDto(ex.getMessage(),
-                ex.getErrorCode().getCode(), LocalDateTime.now());
+        final ErrorResponseDto errorResponseDto = new ErrorResponseDto(ex.getErrorCode().getCode(),
+                ex.getMessage(), LocalDateTime.now());
         final HttpStatus httpStatus = httpErrorStatusResolver.resolveHttpStatus(ex.getErrorCode());
         return new ResponseEntity<>(errorResponseDto, httpStatus);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoResourceFoundException.class)
-    public ErrorResponseDto handleNoResourceFoundException(final ControlledErrorException ex, final HttpServletRequest request) {
-        final String message = format("The requested resource was not found: %s", request.getRequestURI());
+    public ErrorResponseDto handleNoResourceFoundException(final NoResourceFoundException ex, final HttpServletRequest request) {
+        final String message = format("Invalid endpoint path: %s. Review the path", request.getRequestURI());
         log.error(message);
-        return new ErrorResponseDto(ex.getErrorCode().getCode(), ex.getMessage(), LocalDateTime.now());
+        return new ErrorResponseDto(ApplicationErrorCodes.WRONG_PATH.getCode(), message, LocalDateTime.now());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

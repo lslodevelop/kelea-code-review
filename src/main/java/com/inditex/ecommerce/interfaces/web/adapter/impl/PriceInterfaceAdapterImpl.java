@@ -25,6 +25,6 @@ public class PriceInterfaceAdapterImpl implements PriceInterfaceAdapter {
     public PriceDto getPrice(final String applyDateAsString, final Long productId, final Long brandId) {
         final LocalDateTime applyDate = dateValidator.validateLocalDateTimeFormat(applyDateAsString);
         final Price price = priceServicePort.getPrice(applyDate, productId, brandId);
-        return price != null ? priceInterfaceMapper.fromDomainToDto(price) : null;
+        return priceInterfaceMapper.fromDomainToDto(price);
     }
 }

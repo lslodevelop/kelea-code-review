@@ -22,10 +22,11 @@ public class PriceServicePortImpl implements PriceServicePort {
     @Override
     @Cacheable(value = "price", key = "{#applyDate, #productId, #brandId}", unless = "#result == null")
     public Price getPrice(final LocalDateTime applyDate, final Long productId, final Long brandId) {
-        log.info("NO CACHEOOOOOO!");
-        return priceRepositoryPort.getPrice(applyDate, productId, brandId)
-                .orElseThrow(() -> new ControlledErrorException(
-                        ApplicationErrorCodes.NOT_FOUND_PRICE_ERROR,
-                        "Price not found for provided criteria: " + applyDate.toString() + productId + brandId));
+        return priceRepositoryPort
+                .getPrice(applyDate, productId, brandId)
+                .orElseThrow(() ->
+                        new ControlledErrorException(ApplicationErrorCodes.NOT_FOUND_PRICE_ERROR,
+                                "Price not found for provided criteria: " + "applyDate: " + applyDate.toString()
+                                        + ", productId: " + productId + ", brandId: " + brandId));
     }
 }

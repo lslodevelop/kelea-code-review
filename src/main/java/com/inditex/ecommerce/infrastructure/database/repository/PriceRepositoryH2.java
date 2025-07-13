@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface PriceRepositoryH2 extends JpaRepository<PriceEntity, Long> {
 
-    Optional<PriceEntity> findTopByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+    Optional<PriceEntity> findTopByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityDesc(
             Long productId, Long brandId, LocalDateTime startDateBefore, LocalDateTime endDateAfter);
 }
