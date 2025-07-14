@@ -29,8 +29,7 @@ Se ha utilizado Spring AOP para implementar un aspecto que monitoriza la entrada
 El aplicativo usa Caffeine para implementar una caché a nivel de la capa de aplicación que mejora el rendimiento de las consultas. En el application.yml está la configuración de la misma.
 
 ## Testing
-
-El proyecto tiene tests unitarios y de integración que comprueban y cubren el 100% de la implementación y de los escenarios pedidos en el enunciado.
+El proyecto tiene tests unitarios y de integración que comprueban y cubren el 100% de la implementación y de los escenarios pedidos en el enunciado. La creación de la base de datos y la posterior inserción de datos para las pruebas se ha implementado mediante scripts de Liquibase.
 
 ## Métricas
 Se ha añadido soporte con Micrometer para generar identificadores de las trazas por petición y que puedan incluirse en los logs con fines de trazabilidad. Se han expuesto los endpoints de metrics y Prometheus para añadir métricas básicas del aplicativo.
