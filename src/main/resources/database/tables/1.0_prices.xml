@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- ChangeSet 1: Crear tabla -->
+    <changeSet id="Creación de tabla prices" author="Luis López">
+        <createTable tableName="prices">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_list" type="INT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="product_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" type="INT"/>
+            <column name="amount" type="DECIMAL(10,2)"/>
+            <column name="currency" type="VARCHAR(3)"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_prices_brand"
+                baseTableName="prices"
+                baseColumnNames="brand_id"
+                referencedTableName="brands"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+        <rollback>
+            <dropTable tableName="prices"/>
+        </rollback>
+    </changeSet>
+
+    <!-- ChangeSet 2: Insertar datos -->
+    <changeSet id="Inserción de datos iniciales en la tabla" author="Luis López">
+        <insert tableName="prices">
+            <column name="id" type="BIGINT" autoIncrement="true"/>
+            <column name="brand_id" value="1"/>
+            <column name="start_date" value="2020-06-14T00:00:00"/>
+            <column name="end_date" value="2020-12-31T23:59:59"/>
+            <column name="price_list" value="1"/>
+            <column name="product_id" value="35455"/>
+            <column name="priority" value="0"/>
+            <column name="amount" value="35.50"/>
+            <column name="currency" value="EUR"/>
+        </insert>
+        <insert tableName="prices">
+            <column name="id" type="BIGINT" autoIncrement="true"/>
+            <column name="brand_id" value="1"/>
+            <column name="start_date" value="2020-06-14T15:00:00"/>
+            <column name="end_date" value="2020-06-14T18:30:00"/>
+            <column name="price_list" value="2"/>
+            <column name="product_id" value="35455"/>
+            <column name="priority" value="1"/>
+            <column name="amount" value="25.45"/>
+            <column name="currency" value="EUR"/>
+        </insert>
+        <insert tableName="prices">
+            <column name="id" type="BIGINT" autoIncrement="true"/>
+            <column name="brand_id" value="1"/>
+            <column name="start_date" value="2020-06-15T00:00:00"/>
+            <column name="end_date" value="2020-06-15T11:00:00"/>
+            <column name="price_list" value="3"/>
+            <column name="product_id" value="35455"/>
+            <column name="priority" value="1"/>
+            <column name="amount" value="30.50"/>
+            <column name="currency" value="EUR"/>
+        </insert>
+        <insert tableName="prices">
+            <column name="id" type="BIGINT" autoIncrement="true"/>
+            <column name="brand_id" value="1"/>
+            <column name="start_date" value="2020-06-15T16:00:00"/>
+            <column name="end_date" value="2020-12-31T23:59:59"/>
+            <column name="price_list" value="4"/>
+            <column name="product_id" value="35455"/>
+            <column name="priority" value="1"/>
+            <column name="amount" value="38.95"/>
+            <column name="currency" value="EUR"/>
+        </insert>
+
+        <rollback>
+            <delete tableName="prices"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
